@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+// eslint-disable-next-line no-undef
 const db = require('../database/dbConfig.js');
 
 module.exports = {

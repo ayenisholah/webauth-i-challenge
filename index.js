@@ -1,11 +1,15 @@
+/* eslint-disable no-undef */
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 
+
 const Users = require('./users/users-model.js');
 
 const server = express();
+
+const restricted = require('./auth/restricted-middleware.js');
 
 server.use(helmet());
 server.use(express.json());
@@ -45,7 +49,7 @@ server.post('/api/login', (req, res) => {
     });
 });
 
-server.get('/api/users', (req, res) => {
+server.get('/api/users', restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
