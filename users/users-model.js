@@ -24,3 +24,8 @@ function add(user) {
     });
 }
 
+function findById(id) {
+  return db('users')
+    .where({ id })
+      .first();
+}
