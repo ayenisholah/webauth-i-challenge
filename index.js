@@ -9,7 +9,8 @@ const Users = require('./users/users-model.js');
 
 const server = express();
 
-const restricted = require('./auth/restricted-middleware.js');
+const restricted = require('./auth/middleware.js');
+const checkCredentialsInBody = require('./auth/middleware.js')
 
 server.use(helmet());
 server.use(express.json());
@@ -32,7 +33,7 @@ server.post('/api/register', (req, res) => {
     });
 });
 
-server.post('/api/login', (req, res) => {
+server.post('/api/login', checkCredentialsInBody, (req, res) => {
   let { username, password } = req.body;
 
   Users.findBy({ username })
