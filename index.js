@@ -45,5 +45,13 @@ server.post('/api/login', (req, res) => {
     });
 });
 
-const port = process.env.Port || 7777;
+server.get('/api/users', (req, res) => {
+  Users.find()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => res.send(err));
+});
+
+const port = 7777;
 server.listen(port, () => console.log(`\n >>>> Magic happening on 7777 <<<< \n`));
